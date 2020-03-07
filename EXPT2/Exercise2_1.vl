@@ -1,0 +1,15 @@
+//Exercise2_1
+
+module show();
+	reg [20:0] a;
+	reg [8*20:0] string;
+	
+	initial begin
+		a= 12 'h 9D3;
+		$display("Hexadecimal: %0h", a);
+		$display("Real Number: %d", 2E5);
+		$display("%s", "\\ \t % \"");
+		string = "Hello World";
+		$display("%0s", string);
+	end
+endmodule
