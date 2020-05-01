@@ -1,0 +1,22 @@
+//Exercise2_2.vl
+//Group03
+//CPE114L - B1
+`timescale 100ns / 1 ns
+
+	`include "Drill1_1.vl"
+module testbench;
+	reg a, b,borrowIn;
+	wire diff, borrowOut;
+
+	initial begin
+		a = 1'b1;
+		b = 1'b1;
+		borrowIn = 1'b0;
+		#10 a = 1'b1;
+		#10 a = 1'b0; b = 1'b1;
+		#10 a = 1'b1; b = 1'b0;
+		#10 borrowIn = 1'b1;
+		end
+	initial begin
+	end
+endmodule
