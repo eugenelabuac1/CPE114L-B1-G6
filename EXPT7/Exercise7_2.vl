@@ -1,0 +1,41 @@
+module multiplicationRecursive(product, multiplicand, multiplier);
+	input [7:0] multiplicand, multiplier;
+	output [15:0] product;
+	
+	assign product = mulByContAdd(multiplicand, multiplier);
+
+	function automatic [15:0] mulByContAdd;
+		input [7:0] multiplicand, multiplier;
+
+		begin
+			if(multiplier==0 || multiplicand ==0)
+				mulByContAdd = 0;
+			else begin
+				if(multiplier==1)
+					mulByContAdd = multiplicand;
+				else
+					mulByContAdd = multiplicand + mulByContAdd(multiplicand, multiplier-1);
+			end
+		end
+	endfunction
+endmodule
+
+module testbench;
+	reg [7:0] multiplicand, multiplier;
+	wire [15:0] product;
+
+	multiplicationRecursive tb(product, multiplicand, multiplier);
+	
+	initial begin
+	multiplicand=0; multiplier=0;
+	$display("\nMultiplication By Recursive Function of Successive Addition\n");
+	$display("\tMultiplicand x Multiplier = Product");
+	$monitor("\t      %0d      x      %0d     =    %0d", multiplicand, multiplier, product);
+	#2 multiplicand=0; multiplier=1;
+	#2 multiplicand=2; multiplier=0;
+	#2 multiplicand=2; multiplier=3;
+	#2 multiplicand=5; multiplier=4;
+	#2 multiplicand=3; multiplier=3;
+	#2 $finish;
+	end
+endmodule
