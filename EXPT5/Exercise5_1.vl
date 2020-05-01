@@ -1,0 +1,55 @@
+module up_down_4bitcounter (
+out,
+up_down,
+clk,
+data,
+reset
+);
+
+//Output Ports
+output [3:0] out;
+
+//Input Ports
+input [3:0] data;
+input up_down, clk, reset;
+
+//Internal Variables
+reg [3:0] out;
+
+//Start of Code
+always @(negedge clk)
+if (reset) begin // active high reset
+out <= 4'b0 ;
+end else if (up_down) begin
+out <= out + 1;
+end else begin
+out <= out - 1;
+end
+
+endmodule 
+
+module testbench;
+  reg clk, up_down, reset;
+  wire [3:0] out;
+  
+  up_down_4bitcounter
+  dut (.out(out),
+       .clk(clk),
+       .reset(reset),
+       .up_down(up_down)
+       );
+  
+  initial begin
+    clk = 0;
+    reset = 0;
+    up_down = 1;
+    #10 reset = 1;
+    #10 reset = 0;
+    #100 $finish;
+  end
+  
+  always begin
+    #1 clk = ~clk;
+  end
+  
+endmodule

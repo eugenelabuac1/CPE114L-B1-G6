@@ -1,0 +1,30 @@
+//exer3_2
+module test3_2;
+	reg [3:0]BCD;
+	wire [3:0]Out2;
+	initial begin
+		$display("Decimal Number \t\t BCD Eqv. \t\t 9's Comp. \t\t Decimal Eqv.");
+		#50 BCD=4'd0;
+		$monitor("%d \t\t\t %b \t\t\t %b \t\t\t %d",BCD, BCD, Out2, Out2);
+		#50 BCD=4'd1;
+		#50 BCD=4'd2;
+		#50 BCD=4'd3; 
+		#50 BCD=4'd4; 
+		#50 BCD=4'd5;
+		#50 BCD=4'd6;
+		#50 BCD=4'd7;
+		#50 BCD=4'd8; 
+		#50 BCD=4'd9;
+		#50 $finish;
+	end
+	exer3_2 t3_2(BCD, Out2);
+endmodule
+
+module exer3_2(input [3:0]I, output [3:0] Comp9);
+	wire Anot, Bnot, Cnot;
+	not  (Anot, I[3]),(Bnot, I[2]),(Cnot, I[1]);
+	and  (Comp9[3], Anot, Bnot, Cnot);
+	xor  (Comp9[2], I[2], I[1]);
+	assign Comp9[1] = I[1];
+	not  (Comp9[0], I[0]);
+endmodule
