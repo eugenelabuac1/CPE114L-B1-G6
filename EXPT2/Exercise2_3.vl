@@ -1,0 +1,12 @@
+//Volume calculator
+`define pi 3.1416
+
+module volume;	
+	real r = 2.5;
+	real AnsrRem;
+	initial begin
+		AnsrRem = `pi*r**3*4/3;
+		$display("Volume of a cylinder with a radius of %f = %f cubic units", r, AnsrRem );
+	end
+endmodule
+	
